@@ -5,7 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Data
@@ -17,15 +17,15 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
-    @Column(name = "number",unique = true, nullable = false)
+    @Column(name = "number", nullable = false)
     private Long number;
-    @Column(name = "name",unique = true, nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "expiration",unique = true, nullable = false)
-    private Date expiration;
-    @Column(name = "code",unique = true, nullable = false)
+    @Column(name = "expiration", nullable = false)
+    private LocalDate expiration;
+    @Column(name = "code", nullable = false)
     private Integer code;
-    @Column(name = "dni",unique = true, nullable = false)
+    @Column(name = "dni", nullable = false)
     private Long dni;
     @OneToOne
     @JoinColumn(name = "company_id", nullable = false)

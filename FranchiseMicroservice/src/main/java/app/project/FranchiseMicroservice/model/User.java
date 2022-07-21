@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -24,5 +25,5 @@ public class User {
     @Column(name="password", nullable=false)
     private String password;
     @Column(name="birth", nullable=false)
-    private Date birth;
+    private LocalDate birth;
 }
