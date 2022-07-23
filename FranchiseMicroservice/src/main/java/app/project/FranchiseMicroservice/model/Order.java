@@ -5,7 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -21,9 +22,9 @@ public class Order {
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
     @Column(name = "date", nullable = false)
-    private Date date;
+    private LocalDate date;
     @Column(name = "time", nullable = false)
-    private Date time;
+    private LocalTime time;
     @ManyToOne
     @JoinColumn(name = "payment_id",nullable = false)
     private Payment payment;
