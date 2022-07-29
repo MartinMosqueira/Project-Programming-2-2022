@@ -1,5 +1,6 @@
 package app.project.FranchiseMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,7 @@ public class Card {
     private Long number;
     @Column(name = "name", nullable = false)
     private String name;
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "expiration", nullable = false)
     private LocalDate expiration;
     @Column(name = "code", nullable = false)
@@ -28,9 +30,9 @@ public class Card {
     @Column(name = "dni", nullable = false)
     private Long dni;
     @OneToOne
-    @JoinColumn(name = "company_id", nullable = false)
+    @JoinColumn(name = "company", nullable = false)
     private Company company;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "users", nullable = false)
+    private Users users;
 }

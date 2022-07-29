@@ -1,5 +1,6 @@
 package app.project.FranchiseMicroservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,23 +14,25 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "orders")
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "user_id",nullable = false)
-    private User user;
+    @JoinColumn(name = "users",nullable = false)
+    private Users users;
+    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "date", nullable = false)
     private LocalDate date;
+    @JsonFormat(pattern="HH:mm:ss")
     @Column(name = "time", nullable = false)
     private LocalTime time;
     @ManyToOne
-    @JoinColumn(name = "payment_id",nullable = false)
+    @JoinColumn(name = "payment",nullable = false)
     private Payment payment;
     @ManyToOne
-    @JoinColumn(name = "card_id",nullable = false)
+    @JoinColumn(name = "card",nullable = false)
     private Card card;
     @Column(name = "total", nullable = false)
     private Float total;

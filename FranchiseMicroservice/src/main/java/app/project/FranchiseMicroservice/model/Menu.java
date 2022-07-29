@@ -5,23 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "menu")
-public class Menu {
+public class Menu{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id",unique = true, nullable = false)
+    @Column(name = "id",unique = true)
     private Long id;
-    @Column(name = "name",nullable = false)
+    @Column(name = "name")
     private String name;
-    @Column(name = "description",nullable = false)
+    @Column(name = "description")
     private String description;
-    @Column(name = "price", nullable = false)
+    @Column(name = "price")
     private Float price;
-    @Column(name = "image", nullable = false)
+    @Column(name = "image")
     private String image;
 }

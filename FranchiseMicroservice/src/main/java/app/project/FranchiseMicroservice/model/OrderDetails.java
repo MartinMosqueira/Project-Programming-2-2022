@@ -10,20 +10,20 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "ordersdetails")
+@Table(name = "orderdetails")
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
+    @JoinColumn(name = "orders", nullable = false)
+    private Orders orders;
     @ManyToOne
-    @JoinColumn(name = "menu_id")
+    @JoinColumn(name = "menu", nullable = false)
     private Menu menu;
-    @Column(name = "quantity")
+    @Column(name = "quantity", nullable = false)
     private Integer quantity;
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Float price;
 }
