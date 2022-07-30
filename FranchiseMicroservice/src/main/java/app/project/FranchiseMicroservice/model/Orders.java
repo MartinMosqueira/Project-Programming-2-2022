@@ -32,7 +32,7 @@ public class Orders {
     @JoinColumn(name = "payment",nullable = false)
     private Payment payment;
     @ManyToOne
-    @JoinColumn(name = "card",nullable = false)
+    @JoinColumn(name = "card")
     private Card card;
     @Column(name = "total", nullable = false)
     private Float total;

@@ -16,7 +16,7 @@ public class UsersService {
         return usersRepo.save(user);
     }
 
-    public Optional<Users> get_user_service(Integer id){
+    public Optional<Users> get_user_service(Long id){
         return usersRepo.findById(id);
     }
 }

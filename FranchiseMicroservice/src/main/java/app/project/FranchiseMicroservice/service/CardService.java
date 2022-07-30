@@ -15,4 +15,8 @@ public class CardService {
     public List<Card> get_all_card_user_service(Long id){
         return cardRepo.findAllByUsersId(id);
     }
+
+    public Card create_card_user_service(Card card){
+        return cardRepo.save(card);
+    }
 }

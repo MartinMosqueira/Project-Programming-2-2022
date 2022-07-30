@@ -22,10 +22,25 @@ public class UsersController {
     }
 
     @GetMapping("/user/{id}")
-    public ResponseEntity<JSONObject> get_user_controller(@PathVariable Integer id){
+    public ResponseEntity<JSONObject> get_user_controller(@PathVariable Long id){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", usersService.get_user_service(id).get().getId());
         jsonObject.put("name", usersService.get_user_service(id).get().getName());
+        return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{id}")
+    public ResponseEntity<JSONObject> get_user_email_controller(@PathVariable Long id){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("email", usersService.get_user_service(id).get().getEmail());
+        return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
+    }
+
+    @GetMapping("/ident/{id}")
+    public ResponseEntity<JSONObject> get_user_identification_controller(@PathVariable Long id){
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("name", usersService.get_user_service(id).get().getName());
+        jsonObject.put("birth", usersService.get_user_service(id).get().getBirth());
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
     }
 }

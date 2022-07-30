@@ -17,15 +17,15 @@ import java.time.LocalDate;
 public class Users{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id",unique = true)
-    private Integer id;
-    @Column(name="name")
+    @Column(name = "id",unique = true, nullable = false)
+    private Long id;
+    @Column(name="name", nullable = false)
     private String name;
-    @Column(name="email")
+    @Column(name="email", nullable = false)
     private String email;
-    @Column(name="password")
+    @Column(name="password", nullable = false)
     private String password;
     @JsonFormat(pattern="yyyy-MM-dd")
-    @Column(name="birth")
+    @Column(name="birth", nullable = false)
     private LocalDate birth;
 }

@@ -15,14 +15,14 @@ import java.io.Serializable;
 public class Menu{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id",unique = true)
+    @Column(name = "id",unique = true, nullable = false)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "description")
+    @Column(name = "description", nullable = false)
     private String description;
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     private Float price;
-    @Column(name = "image")
+    @Column(name = "image", nullable = false)
     private String image;
 }
