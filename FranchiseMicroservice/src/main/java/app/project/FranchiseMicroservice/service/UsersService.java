@@ -19,4 +19,21 @@ public class UsersService {
     public Optional<Users> get_user_service(Long id){
         return usersRepo.findById(id);
     }
+
+    public void update_user_email_service(Users users, Long id){
+        Optional<Users> getUser=this.usersRepo.findById(id);
+        Users userSelect=getUser.get();
+        userSelect.setEmail(users.getEmail());
+
+        this.usersRepo.save(userSelect);
+    }
+
+    public void update_user_identity_service(Users users,Long id){
+        Optional<Users> getUser=this.usersRepo.findById(id);
+        Users userSelect=getUser.get();
+        userSelect.setName(users.getName());
+        userSelect.setBirth(users.getBirth());
+
+        this.usersRepo.save(userSelect);
+    }
 }

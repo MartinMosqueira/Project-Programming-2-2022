@@ -9,6 +9,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -27,4 +28,10 @@ public class CardController {
     public ResponseEntity<Card> create_card_user_controller(@Validated @RequestBody Card card){
         return new ResponseEntity<Card>(cardService.create_card_user_service(card),HttpStatus.OK);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<Card>> get_card_user_controller(@PathVariable Long id){
+        return new ResponseEntity<Optional<Card>>(cardService.get_card_user_service(id),HttpStatus.OK);
+    }
+
 }

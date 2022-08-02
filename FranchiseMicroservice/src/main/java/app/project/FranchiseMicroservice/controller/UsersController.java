@@ -43,4 +43,16 @@ public class UsersController {
         jsonObject.put("birth", usersService.get_user_service(id).get().getBirth());
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
     }
+
+    @PutMapping("update/email/{id}")
+    public ResponseEntity<Void> update_user_email_controller(@PathVariable Long id, @Validated @RequestBody Users users ){
+        usersService.update_user_email_service(users,id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
+
+    @PutMapping("update/ident/{id}")
+    public ResponseEntity<Void> update_user_identity_controller(@PathVariable Long id, @Validated @RequestBody Users users){
+        usersService.update_user_identity_service(users,id);
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }

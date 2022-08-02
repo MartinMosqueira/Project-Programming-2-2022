@@ -5,6 +5,8 @@ import app.project.FranchiseMicroservice.repo.IOrderDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderDetailsService {
     @Autowired
@@ -12,5 +14,9 @@ public class OrderDetailsService {
 
     public OrderDetails create_orderDetails_service(OrderDetails orderDetails){
         return orderDetailsRepo.save(orderDetails);
+    }
+
+    public List<OrderDetails> get_orderDetails_user_service(Long id){
+        return orderDetailsRepo.findAllByOrdersUsersId(id);
     }
 }

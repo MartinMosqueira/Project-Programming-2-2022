@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CardService {
@@ -19,4 +20,9 @@ public class CardService {
     public Card create_card_user_service(Card card){
         return cardRepo.save(card);
     }
+
+    public Optional<Card> get_card_user_service(Long id){
+        return cardRepo.findById(id);
+    }
+
 }
