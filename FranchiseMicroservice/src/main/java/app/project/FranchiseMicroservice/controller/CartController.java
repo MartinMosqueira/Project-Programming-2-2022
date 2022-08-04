@@ -2,13 +2,14 @@ package app.project.FranchiseMicroservice.controller;
 
 import app.project.FranchiseMicroservice.model.Cart;
 import app.project.FranchiseMicroservice.service.CartService;
+import net.minidev.json.JSONArray;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -28,9 +29,16 @@ public class CartController {
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }
 
-    /*FIXME return --name*/
     @GetMapping("/search/{id}")
-    public ResponseEntity<List<Cart>> get_all_menu_user_controller(@PathVariable Long id){
-        return new ResponseEntity<List<Cart>>(cartService.get_all_menu_user_service(id),HttpStatus.OK);
+    public ResponseEntity<JSONArray> get_all_menu_user_controller(@PathVariable Long id){
+        JSONArray jsonArray = new JSONArray();
+
+        for(int i=0; i<cartService.get_all_menu_user_service(id).size(); i++){
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("menu", cartService.get_all_menu_user_service(id).get(i).getMenu().getName());
+            jsonArray.add(jsonObject);
+        }
+
+        return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
     }
 }

@@ -25,4 +25,44 @@ public class CardService {
         return cardRepo.findById(id);
     }
 
+    /*NOTE: UPDATE CARD*/
+    public void update_card_number_service(Card card, Long id){
+        Optional<Card> getCard=this.cardRepo.findById(id);
+        Card cardSelect=getCard.get();
+        cardSelect.setNumber(card.getNumber());
+
+        this.cardRepo.save(cardSelect);
+    }
+
+    public void update_card_name_service(Card card, Long id){
+        Optional<Card> getCard=this.cardRepo.findById(id);
+        Card cardSelect=getCard.get();
+        cardSelect.setName(card.getName());
+
+        this.cardRepo.save(cardSelect);
+    }
+
+    public void update_card_expiration_service(Card card, Long id){
+        Optional<Card> getCard=this.cardRepo.findById(id);
+        Card cardSelect=getCard.get();
+        cardSelect.setExpiration(card.getExpiration());
+
+        this.cardRepo.save(cardSelect);
+    }
+
+    public void update_card_code_service(Card card, Long id){
+        Optional<Card> getCard=this.cardRepo.findById(id);
+        Card cardSelect=getCard.get();
+        cardSelect.setCode(card.getCode());
+
+        this.cardRepo.save(cardSelect);
+    }
+
+    public void update_card_dni_service(Card card, Long id){
+        Optional<Card> getCard=this.cardRepo.findById(id);
+        Card cardSelect=getCard.get();
+        cardSelect.setDni(card.getDni());
+
+        this.cardRepo.save(cardSelect);
+    }
 }

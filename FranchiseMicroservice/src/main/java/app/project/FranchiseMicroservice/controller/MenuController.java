@@ -30,18 +30,16 @@ public class MenuController {
         return new ResponseEntity<JSONObject>(jsonObject, HttpStatus.OK);
     }
 
-    /*FIXME return --name, --image*/
     @GetMapping("/all")
     public ResponseEntity<JSONArray> get_all_menu_controller(){
         JSONArray jsonArray = new JSONArray();
-        JSONObject jsonObject = new JSONObject();
 
         for(int i=0; i<menuService.get_all_menu_service().size(); i++){
+            JSONObject jsonObject = new JSONObject();
             jsonObject.put("name",menuService.get_all_menu_service().get(i).getName());
             jsonObject.put("image",menuService.get_all_menu_service().get(i).getImage());
             jsonArray.add(jsonObject);
         }
-        System.out.println(jsonArray);
 
         return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
     }
