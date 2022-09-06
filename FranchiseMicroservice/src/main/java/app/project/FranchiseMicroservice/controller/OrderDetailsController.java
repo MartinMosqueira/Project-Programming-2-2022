@@ -50,18 +50,7 @@ public class OrderDetailsController {
     //REPORTS REQUESTS
 
     @GetMapping("/history/{date1}/{date2}")
-    public ResponseEntity<JSONArray> get_history_reports(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2){
-        JSONArray jsonArray = new JSONArray();
-
-        for(int i=0; i<orderDetailsService.get_history_report(date1,date2).size(); i++){
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("date",orderDetailsService.get_history_report(date1, date2).get(i).getOrders().getDate());
-            jsonObject.put("idOrder",orderDetailsService.get_history_report(date1,date2).get(i).getOrders().getId());
-            jsonObject.put("menu",orderDetailsService.get_history_report(date1,date2).get(i).getMenu().getName());
-            jsonObject.put("price",orderDetailsService.get_history_report(date1,date2).get(i).getPrice());
-            jsonArray.add(jsonObject);
-        }
-
-        return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
+    public ResponseEntity<List<OrderDetails>> get_history_reports(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2){
+        return new ResponseEntity<List<OrderDetails>>(orderDetailsService.get_history_report(date1,date2),HttpStatus.OK);
     }
 }
