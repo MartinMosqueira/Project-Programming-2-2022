@@ -54,8 +54,4 @@ public class OrderDetailsController {
         return new ResponseEntity<List<OrderDetails>>(orderDetailsService.get_history_report(date1,date2),HttpStatus.OK);
     }
 
-    @GetMapping("/recurrent")
-    public void get_recurrent_report(){
-        orderDetailsService.get_recurrent_report();
-    }
 }
