@@ -17,8 +17,8 @@ public class MenuService {
         return menuRepo.findById(id);
     }
 
-    public Menu search_menu_service(String name){
-        return menuRepo.findByName(name);
+    public Menu search_menu_service(String nombre){
+        return menuRepo.findByNombre(nombre);
     }
 
     public List<Menu> get_all_menu_service(){

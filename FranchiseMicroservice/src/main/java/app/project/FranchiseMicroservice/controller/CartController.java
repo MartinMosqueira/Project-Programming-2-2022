@@ -35,7 +35,7 @@ public class CartController {
 
         for(int i=0; i<cartService.get_all_menu_user_service(id).size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("menu", cartService.get_all_menu_user_service(id).get(i).getMenu().getName());
+            jsonObject.put("menu", cartService.get_all_menu_user_service(id).get(i).getMenu().getNombre());
             jsonArray.add(jsonObject);
         }
 

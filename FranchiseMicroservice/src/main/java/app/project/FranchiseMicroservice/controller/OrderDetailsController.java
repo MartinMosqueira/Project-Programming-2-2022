@@ -36,7 +36,7 @@ public class OrderDetailsController {
             jsonObject.put("idOrder",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getId());
             jsonObject.put("date",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getDate());
             jsonObject.put("total",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getTotal());
-            jsonObject.put("menu",orderDetailsService.get_orderDetails_user_service(id).get(i).getMenu().getName());
+            jsonObject.put("menu",orderDetailsService.get_orderDetails_user_service(id).get(i).getMenu().getNombre());
             jsonObject.put("price",orderDetailsService.get_orderDetails_user_service(id).get(i).getPrice());
             jsonObject.put("user",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getUsers().getName());
             jsonObject.put("idUser",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getUsers().getId());

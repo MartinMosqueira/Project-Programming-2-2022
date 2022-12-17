@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -17,12 +18,18 @@ public class Menu{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
-    @Column(name = "name", nullable = false)
-    private String name;
-    @Column(name = "description", nullable = false)
-    private String description;
-    @Column(name = "price", nullable = false)
-    private Float price;
-    @Column(name = "image", nullable = false)
-    private String image;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
+    @Column(name = "descripcion", nullable = false)
+    private String descripcion;
+    @Column(name = "precio", nullable = false)
+    private Double precio;
+    @Column(name = "urlImagen", nullable = false)
+    private String urlImagen;
+    @Column(name = "activo", nullable = false)
+    private Boolean activo;
+    @Column(name = "creado", nullable = false)
+    private Instant creado;
+    @Column(name = "actualizado", nullable = false)
+    private Instant actualizado;
 }

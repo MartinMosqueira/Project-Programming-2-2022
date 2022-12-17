@@ -25,8 +25,8 @@ public class MenuController {
     @GetMapping("/search/{name}")
     public ResponseEntity<JSONObject> search_menu_controller(@PathVariable String name){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name",menuService.search_menu_service(name).getName());
-        jsonObject.put("image",menuService.search_menu_service(name).getImage());
+        jsonObject.put("name",menuService.search_menu_service(name).getNombre());
+        jsonObject.put("image",menuService.search_menu_service(name).getUrlImagen());
         return new ResponseEntity<JSONObject>(jsonObject, HttpStatus.OK);
     }
 
@@ -36,8 +36,8 @@ public class MenuController {
 
         for(int i=0; i<menuService.get_all_menu_service().size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("name",menuService.get_all_menu_service().get(i).getName());
-            jsonObject.put("image",menuService.get_all_menu_service().get(i).getImage());
+            jsonObject.put("name",menuService.get_all_menu_service().get(i).getNombre());
+            jsonObject.put("image",menuService.get_all_menu_service().get(i).getUrlImagen());
             jsonArray.add(jsonObject);
         }
 

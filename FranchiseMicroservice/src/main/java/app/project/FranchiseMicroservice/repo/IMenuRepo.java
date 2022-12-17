@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IMenuRepo extends JpaRepository<Menu, Long> {
-    Menu findByName(String name);
+    Menu findByNombre(String nombre);
 }
