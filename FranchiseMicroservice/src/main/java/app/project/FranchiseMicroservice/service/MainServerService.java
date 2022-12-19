@@ -3,6 +3,7 @@ package app.project.FranchiseMicroservice.service;
 import app.project.FranchiseMicroservice.config.MainServerConfiguration;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryIn;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryOut;
+import app.project.FranchiseMicroservice.repo.IMenuRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,6 +21,9 @@ import java.time.Duration;
 public class MainServerService {
     @Autowired
     private MainServerConfiguration mainServerConfiguration;
+
+    @Autowired
+    private IMenuRepo menuRepo;
 
     public void action_query_main_server_service(){
         String url = this.mainServerConfiguration.getUrl();
@@ -51,6 +55,10 @@ public class MainServerService {
         }
         catch (Exception e){
             e.printStackTrace();
+        }
+
+        if(result.getMenus() != null){
+            this.menuRepo.saveAll(result.getMenus());
         }
 
         System.out.println(result.toString());
