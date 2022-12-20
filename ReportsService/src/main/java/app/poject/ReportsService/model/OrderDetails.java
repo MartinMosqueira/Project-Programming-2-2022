@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class OrderDetails {
     private Long id;
+    private String ventaId;
     private Orders orders;
     private Menu menu;
     private Integer quantity;

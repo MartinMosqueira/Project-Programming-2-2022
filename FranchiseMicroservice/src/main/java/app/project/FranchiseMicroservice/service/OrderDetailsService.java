@@ -5,7 +5,7 @@ import app.project.FranchiseMicroservice.repo.IOrderDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -21,7 +21,7 @@ public class OrderDetailsService {
         return orderDetailsRepo.findAllByOrdersUsersId(id);
     }
 
-    public List<OrderDetails> get_history_report(LocalDate date1, LocalDate date2){
+    public List<OrderDetails> get_history_report(Instant date1, Instant date2){
         return orderDetailsRepo.findAllByOrdersDateBetween(date1, date2);
     }
 

@@ -1,13 +1,11 @@
 package app.project.FranchiseMicroservice.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.Instant;
 
 @Entity
 @Data
@@ -22,12 +20,8 @@ public class Orders {
     @ManyToOne
     @JoinColumn(name = "users",nullable = false)
     private Users users;
-    @JsonFormat(pattern="yyyy-MM-dd")
     @Column(name = "date", nullable = false)
-    private LocalDate date;
-    @JsonFormat(pattern="HH:mm:ss")
-    @Column(name = "time", nullable = false)
-    private LocalTime time;
+    private Instant date;
     @ManyToOne
     @JoinColumn(name = "payment",nullable = false)
     private Payment payment;

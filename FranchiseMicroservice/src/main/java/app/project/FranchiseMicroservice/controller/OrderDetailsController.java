@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.Instant;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class OrderDetailsController {
     //REPORTS REQUESTS
 
     @GetMapping("/history/{date1}/{date2}")
-    public ResponseEntity<List<OrderDetails>> get_history_reports(@PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date1, @PathVariable @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date2){
+    public ResponseEntity<List<OrderDetails>> get_history_reports(@PathVariable Instant date1, @PathVariable  Instant date2){
         return new ResponseEntity<List<OrderDetails>>(orderDetailsService.get_history_report(date1,date2),HttpStatus.OK);
     }
 
