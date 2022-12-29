@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 public class OrderDetails {
     private Long id;
     private String ventaId;
-    private Orders orders;
+    private Orders orden;
     private Menu menu;
-    private Integer quantity;
-    private Float price;
+    private Integer cantidad;
+    private Float precio;
 }

@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface IOrderDetailsRepo extends JpaRepository<OrderDetails, Long> {
-    List<OrderDetails> findAllByOrdersUsersId(Long id);
-    List<OrderDetails> findAllByOrdersDateBetween(Instant date1, Instant date2);
+    List<OrderDetails> findAllByOrdenUsuarioId(Long id);
+    List<OrderDetails> findAllByOrdenFechaBetween(Instant fecha1, Instant fecha2);
 }

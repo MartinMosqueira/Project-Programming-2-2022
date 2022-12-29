@@ -18,11 +18,11 @@ public class OrderDetailsService {
     }
 
     public List<OrderDetails> get_orderDetails_user_service(Long id){
-        return orderDetailsRepo.findAllByOrdersUsersId(id);
+        return orderDetailsRepo.findAllByOrdenUsuarioId(id);
     }
 
-    public List<OrderDetails> get_history_report(Instant date1, Instant date2){
-        return orderDetailsRepo.findAllByOrdersDateBetween(date1, date2);
+    public List<OrderDetails> get_history_report(Instant fecha1, Instant fecha2){
+        return orderDetailsRepo.findAllByOrdenFechaBetween(fecha1, fecha2);
     }
 
 }

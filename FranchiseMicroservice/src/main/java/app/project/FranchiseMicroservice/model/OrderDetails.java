@@ -19,13 +19,13 @@ public class OrderDetails {
     @Column(name = "ventaId", unique = true, nullable = false)
     private String ventaId;
     @ManyToOne
-    @JoinColumn(name = "orders", nullable = false)
-    private Orders orders;
+    @JoinColumn(name = "orden", nullable = false)
+    private Orders orden;
     @ManyToOne
     @JoinColumn(name = "menu", nullable = false)
     private Menu menu;
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
-    @Column(name = "price", nullable = false)
-    private Float price;
+    @Column(name = "cantidad", nullable = false)
+    private Integer cantidad;
+    @Column(name = "precio", nullable = false)
+    private Float precio;
 }

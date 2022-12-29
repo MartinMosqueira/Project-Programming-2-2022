@@ -14,7 +14,7 @@ public class CardService {
     private ICardRepo cardRepo;
 
     public List<Card> get_all_card_user_service(Long id){
-        return cardRepo.findAllByUsersId(id);
+        return cardRepo.findAllByUsuarioId(id);
     }
 
     public Card create_card_user_service(Card card){
@@ -29,7 +29,7 @@ public class CardService {
     public void update_card_number_service(Card card, Long id){
         Optional<Card> getCard=this.cardRepo.findById(id);
         Card cardSelect=getCard.get();
-        cardSelect.setNumber(card.getNumber());
+        cardSelect.setNumero(card.getNumero());
 
         this.cardRepo.save(cardSelect);
     }
@@ -37,7 +37,7 @@ public class CardService {
     public void update_card_name_service(Card card, Long id){
         Optional<Card> getCard=this.cardRepo.findById(id);
         Card cardSelect=getCard.get();
-        cardSelect.setName(card.getName());
+        cardSelect.setNombre(card.getNombre());
 
         this.cardRepo.save(cardSelect);
     }
@@ -45,7 +45,7 @@ public class CardService {
     public void update_card_expiration_service(Card card, Long id){
         Optional<Card> getCard=this.cardRepo.findById(id);
         Card cardSelect=getCard.get();
-        cardSelect.setExpiration(card.getExpiration());
+        cardSelect.setVencimiento(card.getVencimiento());
 
         this.cardRepo.save(cardSelect);
     }
@@ -53,7 +53,7 @@ public class CardService {
     public void update_card_code_service(Card card, Long id){
         Optional<Card> getCard=this.cardRepo.findById(id);
         Card cardSelect=getCard.get();
-        cardSelect.setCode(card.getCode());
+        cardSelect.setCodigo(card.getCodigo());
 
         this.cardRepo.save(cardSelect);
     }

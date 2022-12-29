@@ -31,8 +31,8 @@ public class UsersService {
     public void update_user_identity_service(Users users,Long id){
         Optional<Users> getUser=this.usersRepo.findById(id);
         Users userSelect=getUser.get();
-        userSelect.setName(users.getName());
-        userSelect.setBirth(users.getBirth());
+        userSelect.setNombre(users.getNombre());
+        userSelect.setNacimiento(users.getNacimiento());
 
         this.usersRepo.save(userSelect);
     }

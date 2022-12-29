@@ -1,19 +1,16 @@
 package app.project.FranchiseMicroservice.controller;
 
 import app.project.FranchiseMicroservice.model.OrderDetails;
-import app.project.FranchiseMicroservice.model.Orders;
 import app.project.FranchiseMicroservice.service.OrderDetailsService;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
-import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -34,15 +31,20 @@ public class OrderDetailsController {
 
         for(int i=0; i<orderDetailsService.get_orderDetails_user_service(id).size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("idOrder",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getId());
-            jsonObject.put("date",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getDate());
-            jsonObject.put("total",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getTotal());
+            jsonObject.put("idOrden",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getId());
+            jsonObject.put("fecha",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getFecha());
+            jsonObject.put("total",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getTotal());
             jsonObject.put("menu",orderDetailsService.get_orderDetails_user_service(id).get(i).getMenu().getNombre());
-            jsonObject.put("price",orderDetailsService.get_orderDetails_user_service(id).get(i).getPrice());
-            jsonObject.put("user",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getUsers().getName());
-            jsonObject.put("idUser",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getUsers().getId());
-            jsonObject.put("cardNumber",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getCard().getNumber());
-            jsonObject.put("cardCompany",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrders().getCard().getCompany().getName());
+            jsonObject.put("precio",orderDetailsService.get_orderDetails_user_service(id).get(i).getPrecio());
+            jsonObject.put("usuario",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getUsuario().getNombre());
+            jsonObject.put("idUsuario",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getUsuario().getId());
+            try{
+                jsonObject.put("tarjeta numero",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getTarjeta().getNumero());
+                jsonObject.put("compañia",orderDetailsService.get_orderDetails_user_service(id).get(i).getOrden().getTarjeta().getCompania().getNombre());
+            }catch (java.lang.NullPointerException ex){
+                jsonObject.put("tarjeta numero","Sin tarjeta");
+                jsonObject.put("compañia","Sin tarjeta");
+            }
             jsonArray.add(jsonObject);
         }
         return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);

@@ -11,9 +11,9 @@ import java.time.Instant;
 @AllArgsConstructor
 public class Orders {
     private Long id;
-    private Users users;
-    private Instant date;
-    private Payment payment;
-    private Card card;
+    private Users usuario;
+    private Instant fecha;
+    private Payment pago;
+    private Card tarjeta;
     private Float total;
 }

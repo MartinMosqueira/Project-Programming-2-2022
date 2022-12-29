@@ -11,11 +11,11 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Card {
     private Long id;
-    private Long number;
-    private String name;
-    private LocalDate expiration;
-    private Integer code;
+    private Long numero;
+    private String nombre;
+    private LocalDate vencimiento;
+    private Integer codigo;
     private Long dni;
-    private Company company;
-    private Users users;
+    private Company compania;
+    private Users usuario;
 }

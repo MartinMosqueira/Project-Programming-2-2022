@@ -25,9 +25,9 @@ public class CardController {
 
         for(int i=0; i<cardService.get_all_card_user_service(id).size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("number",cardService.get_all_card_user_service(id).get(i).getNumber());
-            jsonObject.put("company",cardService.get_all_card_user_service(id).get(i).getCompany().getName());
-            jsonObject.put("expiration",cardService.get_all_card_user_service(id).get(i).getExpiration());
+            jsonObject.put("numero",cardService.get_all_card_user_service(id).get(i).getNumero());
+            jsonObject.put("compania",cardService.get_all_card_user_service(id).get(i).getCompania().getNombre());
+            jsonObject.put("vencimiento",cardService.get_all_card_user_service(id).get(i).getVencimiento());
             jsonArray.add(jsonObject);
         }
 

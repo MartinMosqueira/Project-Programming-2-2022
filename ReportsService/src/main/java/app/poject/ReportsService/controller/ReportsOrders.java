@@ -31,10 +31,10 @@ public class ReportsOrders {
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<Arrays.asList(orderDetails.getBody()).size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("fecha",Arrays.asList(orderDetails.getBody()).get(i).getOrders().getDate());
+            jsonObject.put("fecha",Arrays.asList(orderDetails.getBody()).get(i).getOrden().getFecha());
             jsonObject.put("ventaId",Arrays.asList(orderDetails.getBody()).get(i).getVentaId());
             jsonObject.put("menu",Arrays.asList(orderDetails.getBody()).get(i).getMenu().getId());
-            jsonObject.put("precio",Arrays.asList(orderDetails.getBody()).get(i).getPrice());
+            jsonObject.put("precio",Arrays.asList(orderDetails.getBody()).get(i).getPrecio());
             jsonArray.add(jsonObject);
         }
         return new ResponseEntity<JSONArray>(jsonArray, HttpStatus.OK);

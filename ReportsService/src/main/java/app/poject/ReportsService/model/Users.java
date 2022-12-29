@@ -11,8 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Users {
     private Long id;
-    private String name;
+    private String nombre;
     private String email;
     private String password;
-    private LocalDate birth;
+    private LocalDate nacimiento;
 }

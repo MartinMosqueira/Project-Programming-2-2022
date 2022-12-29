@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity
@@ -19,13 +18,13 @@ public class Users{
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
-    @Column(name="name", nullable = false)
-    private String name;
+    @Column(name="nombre", nullable = false)
+    private String nombre;
     @Column(name="email", nullable = false)
     private String email;
     @Column(name="password", nullable = false)
     private String password;
     @JsonFormat(pattern="yyyy-MM-dd")
-    @Column(name="birth", nullable = false)
-    private LocalDate birth;
+    @Column(name="nacimiento", nullable = false)
+    private LocalDate nacimiento;
 }

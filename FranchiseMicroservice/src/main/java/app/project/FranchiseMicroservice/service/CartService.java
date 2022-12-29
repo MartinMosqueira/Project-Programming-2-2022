@@ -21,6 +21,6 @@ public class CartService {
     }
 
     public List<Cart> get_all_menu_user_service(Long id){
-        return cartRepo.findAllByUsersId(id);
+        return cartRepo.findAllByUsuarioId(id);
     }
 }

@@ -18,21 +18,21 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
-    @Column(name = "number", nullable = false)
-    private Long number;
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "numero", nullable = false)
+    private Long numero;
+    @Column(name = "nombre", nullable = false)
+    private String nombre;
     @JsonFormat(pattern="yyyy-MM-dd")
-    @Column(name = "expiration", nullable = false)
-    private LocalDate expiration;
-    @Column(name = "code", nullable = false)
-    private Integer code;
+    @Column(name = "vencimiento", nullable = false)
+    private LocalDate vencimiento;
+    @Column(name = "codigo", nullable = false)
+    private Integer codigo;
     @Column(name = "dni", nullable = false)
     private Long dni;
     @OneToOne
-    @JoinColumn(name = "company", nullable = false)
-    private Company company;
+    @JoinColumn(name = "compania", nullable = false)
+    private Company compania;
     @ManyToOne
-    @JoinColumn(name = "users", nullable = false)
-    private Users users;
+    @JoinColumn(name = "usuario", nullable = false)
+    private Users usuario;
 }

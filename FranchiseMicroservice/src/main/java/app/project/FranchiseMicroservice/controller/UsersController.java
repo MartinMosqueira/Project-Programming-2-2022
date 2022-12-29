@@ -25,7 +25,7 @@ public class UsersController {
     public ResponseEntity<JSONObject> get_user_controller(@PathVariable Long id){
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("id", usersService.get_user_service(id).get().getId());
-        jsonObject.put("name", usersService.get_user_service(id).get().getName());
+        jsonObject.put("nombre", usersService.get_user_service(id).get().getNombre());
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
     }
 
@@ -39,8 +39,8 @@ public class UsersController {
     @GetMapping("/ident/{id}")
     public ResponseEntity<JSONObject> get_user_identification_controller(@PathVariable Long id){
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("name", usersService.get_user_service(id).get().getName());
-        jsonObject.put("birth", usersService.get_user_service(id).get().getBirth());
+        jsonObject.put("nombre", usersService.get_user_service(id).get().getNombre());
+        jsonObject.put("nacimiento", usersService.get_user_service(id).get().getNacimiento());
         return new ResponseEntity<JSONObject>(jsonObject,HttpStatus.OK);
     }
 

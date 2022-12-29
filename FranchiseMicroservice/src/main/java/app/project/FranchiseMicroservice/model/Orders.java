@@ -18,16 +18,16 @@ public class Orders {
     @Column(name = "id",unique = true, nullable = false)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "users",nullable = false)
-    private Users users;
-    @Column(name = "date", nullable = false)
-    private Instant date;
+    @JoinColumn(name = "usuario",nullable = false)
+    private Users usuario;
+    @Column(name = "fecha", nullable = false)
+    private Instant fecha;
     @ManyToOne
-    @JoinColumn(name = "payment",nullable = false)
-    private Payment payment;
+    @JoinColumn(name = "pago",nullable = false)
+    private Payment pago;
     @ManyToOne
-    @JoinColumn(name = "card")
-    private Card card;
+    @JoinColumn(name = "tarjeta")
+    private Card tarjeta;
     @Column(name = "total", nullable = false)
     private Float total;
 }

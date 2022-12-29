@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Payment {
     private Long id;
-    private String name;
+    private String nombre;
 }
