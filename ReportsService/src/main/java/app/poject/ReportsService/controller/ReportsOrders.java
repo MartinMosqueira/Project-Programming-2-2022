@@ -26,7 +26,7 @@ public class ReportsOrders {
     @GetMapping("/{date1}/{date2}")
     public ResponseEntity<JSONArray> get_order_history(@PathVariable Instant date1, @PathVariable Instant date2){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
-        ResponseEntity<OrderDetails[]> orderDetails =restTemplate.getForEntity(selectUri.resolve("/details/history/"+date1+"/"+date2), OrderDetails[].class);
+        ResponseEntity<OrderDetails[]> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/history/"+date1+"/"+date2), OrderDetails[].class);
 
         JSONArray jsonArray = new JSONArray();
         for(int i=0; i<Arrays.asList(orderDetails.getBody()).size(); i++){

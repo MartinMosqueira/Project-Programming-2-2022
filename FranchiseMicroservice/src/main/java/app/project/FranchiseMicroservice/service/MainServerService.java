@@ -1,29 +1,21 @@
 package app.project.FranchiseMicroservice.service;
 
 import app.project.FranchiseMicroservice.config.MainServerConfiguration;
-import app.project.FranchiseMicroservice.model.OrderDetails;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryIn;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryOut;
-import app.project.FranchiseMicroservice.modelMainServer.HistoricalReport;
-import app.project.FranchiseMicroservice.modelMainServer.Reporte;
 import app.project.FranchiseMicroservice.repo.IMenuRepo;
-import app.project.FranchiseMicroservice.repo.IOrderDetailsRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
 import javax.transaction.Transactional;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.Duration;
-import java.util.List;
+import java.util.Objects;
 
 @Service
 @Transactional
@@ -35,10 +27,7 @@ public class MainServerService {
     private IMenuRepo menuRepo;
 
     @Autowired
-    private RestTemplate restTemplate;
-
-    @Autowired
-    private IOrderDetailsRepo orderDetailsRepo;
+    private ReportsService reportsService;
 
     public void action_query_main_server_service(){
         String url = this.mainServerConfiguration.getUrl();
@@ -75,24 +64,17 @@ public class MainServerService {
         if(result.getMenus() != null){
             this.menuRepo.saveAll(result.getMenus());
         }
-        else if (result.getReporte() != null){
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.set("Authorization", "Bearer "+token);
 
-            try {
-                URI uri = new URI(url+"/api/reporte/datos");
-                List<OrderDetails> reportes= this.orderDetailsRepo.findAllByOrdenFechaBetween(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin());
-                HistoricalReport report = new HistoricalReport("respuesta_reporte",reportes);
-                HttpEntity<HistoricalReport> entity = new HttpEntity<>(report, headers);
-                this.restTemplate.postForObject(uri, entity, HistoricalReport.class);
+        else if (result.getReporte() != null) {
 
-            } catch (URISyntaxException e) {
-                e.printStackTrace();
+            if (Objects.equals(result.getReporte().getTipo(), "historico")){
+                reportsService.get_history_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin());
+            }
+            else if (Objects.equals(result.getReporte().getTipo(), "recurrente")){
+                reportsService.get_recurrent_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin(),result.getReporte().getIntervalo());
             }
         }
-
         System.out.println(result.toString());
-    }
 
+        }
 }

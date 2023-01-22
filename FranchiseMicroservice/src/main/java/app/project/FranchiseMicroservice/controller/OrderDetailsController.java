@@ -50,11 +50,4 @@ public class OrderDetailsController {
         return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
     }
 
-    //REPORTS REQUESTS
-
-    @GetMapping("/history/{date1}/{date2}")
-    public ResponseEntity<List<OrderDetails>> get_history_reports(@PathVariable Instant date1, @PathVariable  Instant date2){
-        return new ResponseEntity<List<OrderDetails>>(orderDetailsService.get_history_report(date1,date2),HttpStatus.OK);
-    }
-
 }

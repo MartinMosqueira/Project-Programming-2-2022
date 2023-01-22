@@ -14,4 +14,5 @@ public class Reporte {
     private String tipo;
     private Instant fechaInicio;
     private Instant fechaFin;
+    private String intervalo;
 }
