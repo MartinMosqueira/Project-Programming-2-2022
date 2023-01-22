@@ -25,4 +25,10 @@ public class ReportsController {
         reportsService.get_recurrent_report(date1,date2,duration);
         return new ResponseEntity<Void>(HttpStatus.OK);
     }
+
+    @GetMapping("/recurrent/cancel")
+    public ResponseEntity<Void> get_recurrent_report_cancel(){
+        reportsService.get_recurrent_report_cancel();
+        return new ResponseEntity<Void>(HttpStatus.OK);
+    }
 }

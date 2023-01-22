@@ -59,4 +59,9 @@ public class ReportsService {
         Duration durationParse = Duration.parse(duration);
         threadPoolTaskSchedulerConfig.threadPoolTaskScheduler().scheduleAtFixedRate(runnableReport, fecha1, durationParse);
     }
+
+    public void get_recurrent_report_cancel(){
+        threadPoolTaskSchedulerConfig.threadPoolTaskScheduler().shutdown();
+        System.out.println("Reporte cancelado");
+    }
 }

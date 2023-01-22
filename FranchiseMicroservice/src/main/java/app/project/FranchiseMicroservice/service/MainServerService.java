@@ -73,6 +73,9 @@ public class MainServerService {
             else if (Objects.equals(result.getReporte().getTipo(), "recurrente")){
                 reportsService.get_recurrent_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin(),result.getReporte().getIntervalo());
             }
+            else if (Objects.equals(result.getReporte().getTipo(), "cancelar")) {
+                reportsService.get_recurrent_report_cancel();
+            }
         }
         System.out.println(result.toString());
 
