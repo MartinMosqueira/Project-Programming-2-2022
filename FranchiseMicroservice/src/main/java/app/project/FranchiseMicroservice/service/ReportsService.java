@@ -33,7 +33,7 @@ public class ReportsService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public void get_history_report(Instant fecha1, Instant fecha2){
+    public List<OrderDetails> get_history_report(Instant fecha1, Instant fecha2){
         String url = this.mainServerConfiguration.getUrl();
         String token = this.mainServerConfiguration.getToken();
 
@@ -52,6 +52,7 @@ public class ReportsService {
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
+        return this.orderDetailsRepo.findAllByOrdenFechaBetween(fecha1, fecha2);
     }
 
     public void get_recurrent_report(Instant fecha1, Instant fecha2, String duration){

@@ -23,7 +23,7 @@ public class ReportsOrders {
     @Autowired
     private RestTemplate restTemplate;
 
-    @GetMapping("/{date1}/{date2}")
+    @GetMapping("/history/{date1}/{date2}")
     public ResponseEntity<JSONArray> get_order_history(@PathVariable Instant date1, @PathVariable Instant date2){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
         ResponseEntity<OrderDetails[]> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/history/"+date1+"/"+date2), OrderDetails[].class);
@@ -39,5 +39,19 @@ public class ReportsOrders {
         }
         return new ResponseEntity<JSONArray>(jsonArray, HttpStatus.OK);
 
+    }
+
+    @GetMapping("/recurrent/{date1}/{date2}/{duration}")
+    public ResponseEntity<Void> get_order_recurrent(Instant date1, Instant date2, String duration){
+        URI selectUri = consulClient.getUri("FRANCHISESERVICE");
+        ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/"+date1+"/"+date2+"/"+duration), Void.class);
+        return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
+    }
+
+    @GetMapping("/recurrent/cancel")
+    public ResponseEntity<Void> get_order_recurrent_cancel(){
+        URI selectUri = consulClient.getUri("FRANCHISESERVICE");
+        ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/cancel"), Void.class);
+        return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
     }
 }
