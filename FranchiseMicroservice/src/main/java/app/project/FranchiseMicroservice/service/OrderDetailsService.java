@@ -1,29 +1,31 @@
 package app.project.FranchiseMicroservice.service;
 
-import app.project.FranchiseMicroservice.config.ThreadPoolTaskSchedulerConfig;
 import app.project.FranchiseMicroservice.model.OrderDetails;
 import app.project.FranchiseMicroservice.repo.IOrderDetailsRepo;
-import io.netty.util.concurrent.ScheduledFuture;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class OrderDetailsService {
     @Autowired
     private IOrderDetailsRepo orderDetailsRepo;
 
-    @Autowired
-    private ThreadPoolTaskSchedulerConfig threadPoolTaskSchedulerConfig;
+    public final static Logger LOGGER = LoggerFactory.getLogger(OrderDetailsService.class);
 
     public OrderDetails create_orderDetails_service(OrderDetails orderDetails){
-        return orderDetailsRepo.save(orderDetails);
+        try {
+            orderDetailsRepo.save(orderDetails);
+            LOGGER.debug("Product sale: " + orderDetails);
+
+        }catch (Exception e){
+            LOGGER.error("Product sale error: " + e.getMessage());
+            return orderDetailsRepo.save(orderDetails);
+        }
+        return orderDetails;
     }
 
     public List<OrderDetails> get_orderDetails_user_service(Long id){

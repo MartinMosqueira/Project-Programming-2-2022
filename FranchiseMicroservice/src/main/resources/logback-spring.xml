@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOGS" value="./logs" />
+
+    <appender name="Console"
+              class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!-- Fecha | LogLevel | Hilo | Clase asignada al Logger | Clase desde la cual se hizo Logging | Message -->
+            <pattern>%d{ISO8601} %highlight(%-5level) [%thread] %green(%logger{100}) : %msg%n%throwable</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="RollingFile"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/spring-boot-logger.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!-- Fecha | LogLevel | Hilo | Clase desde la cual se hizo Logging | Message -->
+            <Pattern>%d %p [%t] %C{1.} : %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy
+                class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Se trunca el archivo todos los dias o al superar los 10MB. -->
+            <fileNamePattern>${LOGS}/archived/spring-boot-logger-%d{yyyy-MM-dd}.%i.log
+            </fileNamePattern>
+            <!-- Número máximo de días que se conservan los ficheros de registro de archivo. -->
+            <maxHistory>1</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>10MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- Cuando se inicie nuestra aplicación se limpiará los archivos de registro antiguos basándose en los valores de tamaño total e historial máximo. -->
+            <cleanHistoryOnStart>true</cleanHistoryOnStart>
+        </rollingPolicy>
+    </appender>
+
+    <!-- LOG por defecto para todos los paquetes a partir del nivel 'INFO' y superiores. -->
+    <root level="info">
+        <appender-ref ref="Console" />
+    </root>
+
+
+    <!-- LOG para paquetes o clases especificas a partir del nivel 'TRACE' y superiores. -->
+    <logger name="app.project.FranchiseMicroservice.service" level="trace" additivity="false">
+        <appender-ref ref="RollingFile" />
+        <appender-ref ref="Console" />
+    </logger>
+
+</configuration>

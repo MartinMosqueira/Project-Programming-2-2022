@@ -2,6 +2,8 @@ package app.project.FranchiseMicroservice.service;
 
 import app.project.FranchiseMicroservice.model.Menu;
 import app.project.FranchiseMicroservice.repo.IMenuRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ public class MenuService {
     @Autowired
     private IMenuRepo menuRepo;
 
+    public final static Logger LOGGER = LoggerFactory.getLogger(MenuService.class);
+
     public Optional<Menu> get_menu_service(Long id){
         return menuRepo.findById(id);
     }
@@ -23,5 +27,16 @@ public class MenuService {
 
     public List<Menu> get_all_menu_service(){
         return menuRepo.findAll();
+    }
+
+    public List<Menu> save_all_menu_service(List<Menu> menu){
+        try {
+            menuRepo.saveAll(menu);
+            LOGGER.debug("Update menu: " + menu);
+        }catch (Exception e){
+            LOGGER.error("Update menu error: " + e.getMessage());
+            return menuRepo.saveAll(menu);
+        }
+        return menu;
     }
 }

@@ -4,6 +4,8 @@ import app.project.FranchiseMicroservice.config.MainServerConfiguration;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryIn;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryOut;
 import app.project.FranchiseMicroservice.repo.IMenuRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -24,10 +26,12 @@ public class MainServerService {
     private MainServerConfiguration mainServerConfiguration;
 
     @Autowired
-    private IMenuRepo menuRepo;
+    private MenuService menuService;
 
     @Autowired
     private ReportsService reportsService;
+
+    public final static Logger LOGGER = LoggerFactory.getLogger(MainServerService.class);
 
     public void action_query_main_server_service(){
         String url = this.mainServerConfiguration.getUrl();
@@ -62,18 +66,21 @@ public class MainServerService {
         }
 
         if(result.getMenus() != null){
-            this.menuRepo.saveAll(result.getMenus());
+            menuService.save_all_menu_service(result.getMenus());
         }
 
         else if (result.getReporte() != null) {
 
             if (Objects.equals(result.getReporte().getTipo(), "historico")){
+                LOGGER.info("historical report request");
                 reportsService.get_history_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin());
             }
             else if (Objects.equals(result.getReporte().getTipo(), "recurrente")){
+                LOGGER.info("recurrent report request");
                 reportsService.get_recurrent_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin(),result.getReporte().getIntervalo());
             }
             else if (Objects.equals(result.getReporte().getTipo(), "cancelar")) {
+                LOGGER.info("cancel recurrent report request");
                 reportsService.get_recurrent_report_cancel();
             }
         }

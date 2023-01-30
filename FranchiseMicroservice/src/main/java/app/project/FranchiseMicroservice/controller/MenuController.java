@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -44,4 +46,8 @@ public class MenuController {
         return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
     }
 
+    @PostMapping("/save")
+    public ResponseEntity<List<Menu>> save_all_menu_controller(List<Menu> menu){
+        return new ResponseEntity<List<Menu>>(menuService.save_all_menu_service(menu),HttpStatus.OK);
+    }
 }
