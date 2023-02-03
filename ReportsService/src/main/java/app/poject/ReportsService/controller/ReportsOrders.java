@@ -14,6 +14,9 @@ import java.net.URI;
 import java.time.Instant;
 import java.util.Arrays;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/report")
@@ -22,6 +25,8 @@ public class ReportsOrders {
     private ConsulClient consulClient;
     @Autowired
     private RestTemplate restTemplate;
+
+    public final static Logger LOGGER = LoggerFactory.getLogger(ReportsOrders.class);
 
     @GetMapping("/history/{date1}/{date2}")
     public ResponseEntity<JSONArray> get_order_history(@PathVariable Instant date1, @PathVariable Instant date2){
@@ -37,14 +42,16 @@ public class ReportsOrders {
             jsonObject.put("precio",Arrays.asList(orderDetails.getBody()).get(i).getPrecio());
             jsonArray.add(jsonObject);
         }
+        LOGGER.debug("history report: " + jsonArray);
         return new ResponseEntity<JSONArray>(jsonArray, HttpStatus.OK);
 
     }
 
     @GetMapping("/recurrent/{date1}/{date2}/{duration}")
-    public ResponseEntity<Void> get_order_recurrent(Instant date1, Instant date2, String duration){
+    public ResponseEntity<Void> get_order_recurrent(@PathVariable Instant date1, @PathVariable Instant date2, @PathVariable String duration){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
         ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/"+date1+"/"+date2+"/"+duration), Void.class);
+        LOGGER.debug("recurrent report: " + orderDetails.getBody());
         return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
     }
 
@@ -52,6 +59,7 @@ public class ReportsOrders {
     public ResponseEntity<Void> get_order_recurrent_cancel(){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
         ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/cancel"), Void.class);
+        LOGGER.debug("cancel recurrent report");
         return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
     }
 }
