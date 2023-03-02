@@ -1,6 +1,6 @@
 package app.project.FranchiseMicroservice.controller;
 
-import app.project.FranchiseMicroservice.model.OrderDetails;
+import app.project.FranchiseMicroservice.model.postgres.VentaDetalle;
 import app.project.FranchiseMicroservice.service.ReportsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +18,8 @@ public class ReportsController {
     private ReportsService reportsService;
 
     @GetMapping("/history/{date1}/{date2}")
-    public ResponseEntity<List<OrderDetails>> get_history_reports(@PathVariable Instant date1, @PathVariable  Instant date2){
-        return new ResponseEntity<List<OrderDetails>>(reportsService.get_history_report(date1,date2),HttpStatus.OK);
+    public ResponseEntity<List<VentaDetalle>> get_history_reports(@PathVariable Instant date1, @PathVariable  Instant date2){
+        return new ResponseEntity<List<VentaDetalle>>(reportsService.get_history_report(date1,date2),HttpStatus.OK);
     }
 
     @GetMapping("/recurrent/{date1}/{date2}/{duration}")

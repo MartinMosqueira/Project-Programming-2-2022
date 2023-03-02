@@ -1,6 +1,6 @@
 package app.project.FranchiseMicroservice.controller;
 
-import app.project.FranchiseMicroservice.model.Menu;
+import app.project.FranchiseMicroservice.model.postgres.Menu;
 import app.project.FranchiseMicroservice.service.MenuService;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
@@ -38,12 +38,31 @@ public class MenuController {
 
         for(int i=0; i<menuService.get_all_menu_service().size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("nombre",menuService.get_all_menu_service().get(i).getNombre());
-            jsonObject.put("urlImagen",menuService.get_all_menu_service().get(i).getUrlImagen());
-            jsonArray.add(jsonObject);
+            if (menuService.get_all_menu_service().get(i).getActivo()){
+                jsonObject.put("nombre",menuService.get_all_menu_service().get(i).getNombre());
+                jsonObject.put("urlImagen",menuService.get_all_menu_service().get(i).getUrlImagen());
+                jsonArray.add(jsonObject);
+            }
         }
 
         return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
+    }
+
+    @GetMapping("/all/active")
+    public ResponseEntity<JSONArray> get_all_menu_controller_active(){
+        JSONArray jsonArray = new JSONArray();
+
+        for(int i=0; i<menuService.get_all_menu_service_active().size(); i++){
+            JSONObject jsonObject = new JSONObject();
+            if (menuService.get_all_menu_service_active().get(i).getActivo()){
+                jsonObject.put("nombre",menuService.get_all_menu_service_active().get(i).getNombre());
+                jsonObject.put("urlImagen",menuService.get_all_menu_service_active().get(i).getUrlImagen());
+                jsonArray.add(jsonObject);
+            }
+        }
+
+        return new ResponseEntity<JSONArray>(jsonArray,HttpStatus.OK);
+
     }
 
     @PostMapping("/save")

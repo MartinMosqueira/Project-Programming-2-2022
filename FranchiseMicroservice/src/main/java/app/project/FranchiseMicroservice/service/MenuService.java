@@ -1,7 +1,7 @@
 package app.project.FranchiseMicroservice.service;
 
-import app.project.FranchiseMicroservice.model.Menu;
-import app.project.FranchiseMicroservice.repo.IMenuRepo;
+import app.project.FranchiseMicroservice.model.postgres.Menu;
+import app.project.FranchiseMicroservice.repo.postgres.IMenuRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +27,10 @@ public class MenuService {
 
     public List<Menu> get_all_menu_service(){
         return menuRepo.findAll();
+    }
+
+    public List<Menu> get_all_menu_service_active(){
+        return menuRepo.findAllByActivoIsTrue();
     }
 
     public List<Menu> save_all_menu_service(List<Menu> menu){

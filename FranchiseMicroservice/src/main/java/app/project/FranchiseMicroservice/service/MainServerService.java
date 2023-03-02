@@ -3,7 +3,7 @@ package app.project.FranchiseMicroservice.service;
 import app.project.FranchiseMicroservice.config.MainServerConfiguration;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryIn;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryOut;
-import app.project.FranchiseMicroservice.repo.IMenuRepo;
+import app.project.FranchiseMicroservice.service.memory.MenuCService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +15,19 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
-import javax.transaction.Transactional;
 import java.time.Duration;
 import java.util.Objects;
 
 @Service
-@Transactional
 public class MainServerService {
     @Autowired
     private MainServerConfiguration mainServerConfiguration;
 
     @Autowired
     private MenuService menuService;
+
+    @Autowired
+    private MenuCService menuCService;
 
     @Autowired
     private ReportsService reportsService;
@@ -66,7 +67,12 @@ public class MainServerService {
         }
 
         if(result.getMenus() != null){
+            //update menus database
             menuService.save_all_menu_service(result.getMenus());
+
+            //update menus database carrito
+            menuCService.save_all_menu_carrito_service();
+
         }
 
         else if (result.getReporte() != null) {

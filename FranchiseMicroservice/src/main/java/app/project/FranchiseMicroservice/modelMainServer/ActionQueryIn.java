@@ -1,6 +1,6 @@
 package app.project.FranchiseMicroservice.modelMainServer;
 
-import app.project.FranchiseMicroservice.model.Menu;
+import app.project.FranchiseMicroservice.model.postgres.Menu;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

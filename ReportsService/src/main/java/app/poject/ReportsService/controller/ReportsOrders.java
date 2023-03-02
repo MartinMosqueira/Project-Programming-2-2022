@@ -1,7 +1,7 @@
 package app.poject.ReportsService.controller;
 
 import app.poject.ReportsService.client.ConsulClient;
-import app.poject.ReportsService.model.OrderDetails;
+import app.poject.ReportsService.model.VentaDetalle;
 import net.minidev.json.JSONArray;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,15 +31,15 @@ public class ReportsOrders {
     @GetMapping("/history/{date1}/{date2}")
     public ResponseEntity<JSONArray> get_order_history(@PathVariable Instant date1, @PathVariable Instant date2){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
-        ResponseEntity<OrderDetails[]> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/history/"+date1+"/"+date2), OrderDetails[].class);
+        ResponseEntity<VentaDetalle[]> ventaDetalle =restTemplate.getForEntity(selectUri.resolve("/reports/history/"+date1+"/"+date2), VentaDetalle[].class);
 
         JSONArray jsonArray = new JSONArray();
-        for(int i=0; i<Arrays.asList(orderDetails.getBody()).size(); i++){
+        for(int i=0; i<Arrays.asList(ventaDetalle.getBody()).size(); i++){
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("fecha",Arrays.asList(orderDetails.getBody()).get(i).getOrden().getFecha());
-            jsonObject.put("ventaId",Arrays.asList(orderDetails.getBody()).get(i).getVentaId());
-            jsonObject.put("menu",Arrays.asList(orderDetails.getBody()).get(i).getMenu().getId());
-            jsonObject.put("precio",Arrays.asList(orderDetails.getBody()).get(i).getPrecio());
+            jsonObject.put("fecha",Arrays.asList(ventaDetalle.getBody()).get(i).getVenta().getFecha());
+            jsonObject.put("ventaId",Arrays.asList(ventaDetalle.getBody()).get(i).getVenta().getVentaId());
+            jsonObject.put("menu",Arrays.asList(ventaDetalle.getBody()).get(i).getMenu().getId());
+            jsonObject.put("precio",Arrays.asList(ventaDetalle.getBody()).get(i).getPrecio());
             jsonArray.add(jsonObject);
         }
         LOGGER.debug("history report: " + jsonArray);
@@ -50,16 +50,16 @@ public class ReportsOrders {
     @GetMapping("/recurrent/{date1}/{date2}/{duration}")
     public ResponseEntity<Void> get_order_recurrent(@PathVariable Instant date1, @PathVariable Instant date2, @PathVariable String duration){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
-        ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/"+date1+"/"+date2+"/"+duration), Void.class);
-        LOGGER.debug("recurrent report: " + orderDetails.getBody());
-        return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
+        ResponseEntity<Void> ventaDetalle =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/"+date1+"/"+date2+"/"+duration), Void.class);
+        LOGGER.debug("recurrent report: " + ventaDetalle.getBody());
+        return new ResponseEntity<Void>(ventaDetalle.getBody(), HttpStatus.OK);
     }
 
     @GetMapping("/recurrent/cancel")
     public ResponseEntity<Void> get_order_recurrent_cancel(){
         URI selectUri = consulClient.getUri("FRANCHISESERVICE");
-        ResponseEntity<Void> orderDetails =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/cancel"), Void.class);
+        ResponseEntity<Void> ventaDetalle =restTemplate.getForEntity(selectUri.resolve("/reports/recurrent/cancel"), Void.class);
         LOGGER.debug("cancel recurrent report");
-        return new ResponseEntity<Void>(orderDetails.getBody(), HttpStatus.OK);
+        return new ResponseEntity<Void>(ventaDetalle.getBody(), HttpStatus.OK);
     }
 }
