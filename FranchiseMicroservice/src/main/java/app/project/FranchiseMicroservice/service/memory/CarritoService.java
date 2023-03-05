@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -84,6 +85,7 @@ public class CarritoService {
         Venta venta = new Venta();
         VentaDetalle ventaDetalle = new VentaDetalle();
         Double total = 0.0;
+        Instant instantNow=Instant.now();
 
         if (tarjetaCService.get_tarjeta_carrito_service().size() > 0){
             tarjeta.setId(tarjetaService.get_all_card_service().size()+1L);
@@ -106,7 +108,7 @@ public class CarritoService {
 
         venta.setId(ventaService.get_all_venta_service().size()+1L);
         venta.setVentaId(UUID.randomUUID());
-        venta.setFecha(Instant.now());
+        venta.setFecha(instantNow.minus(3, ChronoUnit.HOURS));
         try {
             pago.setId(pagoRepo.findByNombre(pagoCService.get_pago_carrito_service().get(0).getNombre()).getId());
             venta.setPago(pago);

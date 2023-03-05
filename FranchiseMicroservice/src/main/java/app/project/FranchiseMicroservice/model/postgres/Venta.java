@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 @Entity
@@ -30,4 +31,17 @@ public class Venta {
     private Tarjeta tarjeta;
     @Column(name = "total", nullable = false)
     private Double total;
+
+    /*
+    @PrePersist
+    public void prePersistFechaNow(){
+        fecha = fecha.plus(3, ChronoUnit.HOURS);
+    }
+
+    @PreUpdate
+    public void preUpdateFechaNow(){
+        fecha = fecha.plus(3, ChronoUnit.HOURS);
+    }
+
+     */
 }
