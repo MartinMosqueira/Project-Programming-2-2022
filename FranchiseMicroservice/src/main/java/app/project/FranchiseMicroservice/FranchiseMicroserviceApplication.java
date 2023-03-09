@@ -1,7 +1,5 @@
 package app.project.FranchiseMicroservice;
 
-import app.project.FranchiseMicroservice.service.memory.MenuCService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -14,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @SpringBootApplication
 @EnableDiscoveryClient
 @Controller
-public class FranchiseMicroserviceApplication {
+public class FranchiseMicroserviceApplication{
 
 	@RequestMapping("/")
 	@ResponseBody
@@ -28,5 +26,4 @@ public class FranchiseMicroserviceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FranchiseMicroserviceApplication.class, args);
 	}
-
 }
