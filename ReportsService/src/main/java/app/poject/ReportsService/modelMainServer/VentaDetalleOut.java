@@ -1,4 +1,4 @@
-package app.project.FranchiseMicroservice.modelMainServer;
+package app.poject.ReportsService.modelMainServer;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

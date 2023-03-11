@@ -1,4 +1,4 @@
-package app.project.FranchiseMicroservice.config;
+package app.poject.ReportsService.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

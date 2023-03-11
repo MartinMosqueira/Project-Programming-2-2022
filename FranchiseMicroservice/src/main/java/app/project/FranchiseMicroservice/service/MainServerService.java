@@ -1,6 +1,7 @@
 package app.project.FranchiseMicroservice.service;
 
 import app.project.FranchiseMicroservice.config.MainServerConfiguration;
+import app.project.FranchiseMicroservice.config.ReportServerConfiguration;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryIn;
 import app.project.FranchiseMicroservice.modelMainServer.ActionQueryOut;
 import app.project.FranchiseMicroservice.service.memory.MenuCService;
@@ -15,6 +16,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 
+import java.net.URI;
 import java.time.Duration;
 import java.util.Objects;
 
@@ -30,7 +32,7 @@ public class MainServerService {
     private MenuCService menuCService;
 
     @Autowired
-    private ReportsService reportsService;
+    private ReportServerConfiguration reportServerConfiguration;
 
     public final static Logger LOGGER = LoggerFactory.getLogger(MainServerService.class);
 
@@ -39,6 +41,11 @@ public class MainServerService {
         String uuid = this.mainServerConfiguration.getUuid();
         String token = this.mainServerConfiguration.getToken();
         String path = this.mainServerConfiguration.getPath();
+
+        String urlHistory = this.reportServerConfiguration.getUrlHistory();
+        String urlRecurrent = this.reportServerConfiguration.getUrlRecurrent();
+        String urlCancel = this.reportServerConfiguration.getUrlCancel();
+
         HttpClient httpClient=HttpClient.create().responseTimeout(Duration.ofMillis(1000));
 
         WebClient webClient=WebClient.builder()
@@ -79,15 +86,25 @@ public class MainServerService {
 
             if (Objects.equals(result.getReporte().getTipo(), "historico")){
                 LOGGER.info("historical report request");
-                reportsService.get_history_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin());
+
+                URI selectUri = URI.create(urlHistory + result.getReporte().getFechaInicio()+"/"+result.getReporte().getFechaFin());
+                WebClient webClient2 = WebClient.create();
+                webClient2.get().uri(selectUri).retrieve().bodyToMono(String.class).block();
+
             }
             else if (Objects.equals(result.getReporte().getTipo(), "recurrente")){
                 LOGGER.info("recurrent report request");
-                reportsService.get_recurrent_report(result.getReporte().getFechaInicio(), result.getReporte().getFechaFin(),result.getReporte().getIntervalo());
+
+                URI selectUri = URI.create(urlRecurrent + result.getReporte().getFechaInicio()+"/"+result.getReporte().getFechaFin()+"/"+result.getReporte().getIntervalo());
+                WebClient webClient2 = WebClient.create();
+                webClient2.get().uri(selectUri).retrieve().bodyToMono(String.class).block();
             }
             else if (Objects.equals(result.getReporte().getTipo(), "cancelar")) {
                 LOGGER.info("cancel recurrent report request");
-                reportsService.get_recurrent_report_cancel();
+
+                URI selectUri = URI.create(urlCancel);
+                WebClient webClient2 = WebClient.create();
+                webClient2.get().uri(selectUri).retrieve().bodyToMono(String.class).block();
             }
         }
         System.out.println(result.toString());

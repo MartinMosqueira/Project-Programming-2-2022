@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 
 @Service
@@ -32,5 +33,7 @@ public class VentaDetalleService {
         return orderDetailsRepo.findAll();
     }
 
-
+    public List<VentaDetalle> get_date_ventaDetalle_service(Instant date1, Instant date2){
+        return orderDetailsRepo.findAllByVentaFechaBetween(date1, date2);
+    }
 }
