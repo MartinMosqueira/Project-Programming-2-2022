@@ -20,4 +20,9 @@ public class MenuCController {
     public ResponseEntity<List<MenuC>> save_all_menu_carrito_controller(){
         return new ResponseEntity<List<MenuC>>(menuCService.save_all_menu_carrito_service(), HttpStatus.OK);
     }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<MenuC>> get_all_menu_carrito_controller(){
+        return new ResponseEntity<List<MenuC>>(menuCService.get_all_menu_carrito_service(), HttpStatus.OK);
+    }
 }

@@ -32,4 +32,7 @@ public class MenuCService {
         return menuCRepo.findAll();
     }
 
+    public List<MenuC> get_all_menu_carrito_service(){
+        return menuCRepo.findAll();
+    }
 }
